@@ -15,7 +15,7 @@
   --s3:      #1e2530;
   --b0:      rgba(255,255,255,0.05);
   --b1:      rgba(255,255,255,0.09);
-  --b2:      rgba(255,255,255,0.15);
+  --b2:      rgba(255,255,255,0.16);
   --txt:     #dde1ea;
   --dim:     #5a6170;
   --hi:      #a8b5c8;
@@ -24,208 +24,134 @@
   --amber:   #fbbf24;
   --orange:  #f97316;
   --red:     #f87171;
-  --near-bg: rgba(251,191,36,0.07);
-  --near-bd: rgba(251,191,36,0.28);
-  --hit-bg:  rgba(248,113,113,0.07);
-  --hit-bd:  rgba(248,113,113,0.28);
-  --ath-bg:  rgba(74,222,128,0.07);
-  --ath-bd:  rgba(74,222,128,0.28);
-  --mono: 'DM Mono', monospace;
+  --mono:    'DM Mono', monospace;
   --display: 'Syne', sans-serif;
-  --r: 10px;
-  --r-sm: 6px;
+  --r:       10px;
+  --rsm:     6px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 13px; }
-body { background: var(--bg); color: var(--txt); font-family: var(--mono); min-height: 100vh; }
-::selection { background: rgba(34,211,238,0.2); }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:13px}
+body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:100vh}
+::selection{background:rgba(34,211,238,.2)}
 
-/* Layout */
-.wrap { max-width: 1440px; margin: 0 auto; padding: 24px 18px 80px; }
+.wrap{max-width:1440px;margin:0 auto;padding:24px 18px 80px}
 
-/* Header */
-.hdr { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
-.brand { font-family: var(--display); font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-.brand em { color: var(--cyan); font-style: normal; }
-.status { margin-top: 5px; font-size: 11px; color: var(--dim); display: flex; align-items: center; gap: 8px; }
-.live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-.live-dot.loading { background: var(--amber); animation: blink 0.8s ease infinite; }
-.live-dot.error  { background: var(--red); animation: none; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+/* ── Header ── */
+.hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-size:21px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1}
+.brand em{color:var(--cyan);font-style:normal}
+.status-row{margin-top:5px;font-size:11px;color:var(--dim);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+.dot.spin{background:var(--amber);animation:blink .7s ease infinite}
+.dot.err{background:var(--red);animation:none}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-/* Refresh button */
-.btn-refresh {
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  padding: 9px 18px; border-radius: var(--r-sm);
-  border: 1px solid var(--b2); background: var(--s2); color: var(--txt);
-  cursor: pointer; display: flex; align-items: center; gap: 7px;
-  transition: background .15s, border-color .15s;
-  white-space: nowrap;
-}
-.btn-refresh:hover { background: var(--s3); border-color: rgba(255,255,255,.22); }
-.btn-refresh:active { transform: scale(.97); }
-.btn-refresh.spinning svg { animation: spin .7s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
+/* ── Buttons ── */
+.btn{font-family:var(--mono);font-size:11px;font-weight:500;padding:9px 18px;border-radius:var(--rsm);border:1px solid var(--b2);background:var(--s2);color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:7px;transition:background .15s,border-color .15s;white-space:nowrap}
+.btn:hover{background:var(--s3)}
+.btn:active{transform:scale(.97)}
+.btn.go{background:var(--cyan);color:#000;border-color:var(--cyan);font-weight:700}
+.btn.go:hover{background:#1bc8e4}
+.btn svg{transition:transform .1s}
+.btn.spinning svg{animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* Controls row */
-.ctrl { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-.search-box {
-  position: relative; flex: 1; min-width: 160px; max-width: 260px;
-}
-.search-box svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--dim); pointer-events: none; }
-.search-box input {
-  width: 100%; font-family: var(--mono); font-size: 12px;
-  background: var(--s1); border: 1px solid var(--b0); color: var(--txt);
-  border-radius: var(--r-sm); padding: 8px 10px 8px 32px; outline: none;
-  transition: border-color .15s;
-}
-.search-box input:focus { border-color: var(--b2); }
-.search-box input::placeholder { color: var(--dim); }
+/* ── Controls ── */
+.ctrl{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.sbox{position:relative;flex:1;min-width:160px;max-width:260px}
+.sbox svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--dim);pointer-events:none}
+.sbox input{width:100%;font-family:var(--mono);font-size:12px;background:var(--s1);border:1px solid var(--b0);color:var(--txt);border-radius:var(--rsm);padding:8px 10px 8px 32px;outline:none;transition:border-color .15s}
+.sbox input:focus{border-color:var(--b2)}
+.sbox input::placeholder{color:var(--dim)}
+.fpill{font-family:var(--mono);font-size:11px;padding:8px 13px;border-radius:var(--rsm);border:1px solid var(--b0);background:var(--s1);color:var(--dim);cursor:pointer;transition:all .15s;white-space:nowrap}
+.fpill:hover{border-color:var(--b1);color:var(--txt)}
+.fpill.on{border-color:rgba(251,191,36,.4);color:var(--amber);background:rgba(251,191,36,.07)}
+.mgrp{display:flex;align-items:center;gap:6px}
+.mgrp span{font-size:11px;color:var(--dim);white-space:nowrap}
+.mgrp input{font-family:var(--mono);font-size:12px;width:58px;text-align:center;background:var(--s1);border:1px solid var(--b0);color:var(--txt);border-radius:var(--rsm);padding:7px 8px;outline:none;-moz-appearance:textfield}
+.mgrp input::-webkit-inner-spin-button,.mgrp input::-webkit-outer-spin-button{-webkit-appearance:none}
+.mgrp input:focus{border-color:var(--b2)}
 
-.filter-pill {
-  font-family: var(--mono); font-size: 11px;
-  padding: 8px 13px; border-radius: var(--r-sm);
-  border: 1px solid var(--b0); background: var(--s1); color: var(--dim);
-  cursor: pointer; transition: all .15s; white-space: nowrap;
-}
-.filter-pill:hover { border-color: var(--b1); color: var(--txt); }
-.filter-pill.on { border-color: var(--near-bd); color: var(--amber); background: var(--near-bg); }
-.filter-pill.on:hover { background: rgba(251,191,36,.12); }
+/* ── Summary ── */
+.sumbar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.spill{font-size:11px;color:var(--dim);background:var(--s1);border:1px solid var(--b0);border-radius:20px;padding:4px 12px;display:flex;align-items:center;gap:5px}
+.spill b{color:var(--hi);font-weight:500}
+.spill.warn{border-color:rgba(251,191,36,.3);color:var(--amber)}
+.spill.warn b{color:var(--amber)}
 
-.margin-group { display: flex; align-items: center; gap: 6px; }
-.margin-group span { font-size: 11px; color: var(--dim); white-space: nowrap; }
-.margin-group input {
-  font-family: var(--mono); font-size: 12px; width: 60px; text-align: center;
-  background: var(--s1); border: 1px solid var(--b0); color: var(--txt);
-  border-radius: var(--r-sm); padding: 7px 8px; outline: none;
-  -moz-appearance: textfield;
-}
-.margin-group input::-webkit-inner-spin-button,
-.margin-group input::-webkit-outer-spin-button { -webkit-appearance: none; }
-.margin-group input:focus { border-color: var(--b2); }
+/* ── Grid ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:11px}
 
-/* Summary bar */
-.sumbar { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
-.sum-pill {
-  font-size: 11px; color: var(--dim);
-  background: var(--s1); border: 1px solid var(--b0);
-  border-radius: 20px; padding: 4px 12px;
-  display: flex; align-items: center; gap: 5px;
-}
-.sum-pill b { color: var(--hi); font-weight: 500; }
-.sum-pill.warn { border-color: var(--near-bd); color: var(--amber); }
-.sum-pill.warn b { color: var(--amber); }
+/* ── Card ── */
+.card{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);padding:15px 15px 13px;display:flex;flex-direction:column;transition:border-color .2s,transform .15s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--b2);transform:translateY(-1px)}
+.card.c-near{border-color:rgba(251,191,36,.35);background:color-mix(in srgb,var(--s1) 93%,#fbbf24)}
+.card.c-hit {border-color:rgba(248,113,113,.35);background:color-mix(in srgb,var(--s1) 93%,#f87171)}
+.card.c-ath {border-color:rgba(74,222,128,.35); background:color-mix(in srgb,var(--s1) 93%,#4ade80)}
+.card.c-near::before,.card.c-hit::before,.card.c-ath::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.card.c-near::before{background:linear-gradient(90deg,var(--amber),transparent 65%)}
+.card.c-hit::before {background:linear-gradient(90deg,var(--red),  transparent 65%)}
+.card.c-ath::before {background:linear-gradient(90deg,var(--green), transparent 65%)}
 
-/* Grid */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(235px, 1fr)); gap: 11px; }
+/* skeleton */
+.skel{background:var(--s2);border-radius:4px;animation:shimmer 1.4s ease infinite}
+@keyframes shimmer{0%,100%{opacity:.4}50%{opacity:.9}}
+.sk-t{height:9px;width:55%;margin-bottom:6px}
+.sk-l{height:18px;width:75%;margin-bottom:14px}
+.sk-s{height:7px;width:100%;margin-bottom:5px}
+.sk-m{height:7px;width:70%;margin-bottom:14px}
+.sk-b{height:46px;width:100%;border-radius:7px}
 
-/* Card */
-.card {
-  background: var(--s1); border: 1px solid var(--b0);
-  border-radius: var(--r); padding: 15px 15px 13px;
-  display: flex; flex-direction: column; gap: 0;
-  transition: border-color .2s, transform .15s;
-  position: relative; overflow: hidden;
-}
-.card:hover { border-color: var(--b2); transform: translateY(-1px); }
-.card.near  { border-color: var(--near-bd); background: color-mix(in srgb, var(--s1) 94%, #fbbf24); }
-.card.hit   { border-color: var(--hit-bd);  background: color-mix(in srgb, var(--s1) 94%, #f87171); }
-.card.ath   { border-color: var(--ath-bd);  background: color-mix(in srgb, var(--s1) 94%, #4ade80); }
-.card.near::before,
-.card.hit::before,
-.card.ath::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 2px;
-}
-.card.near::before { background: linear-gradient(90deg, var(--amber), transparent 70%); }
-.card.hit::before  { background: linear-gradient(90deg, var(--red),   transparent 70%); }
-.card.ath::before  { background: linear-gradient(90deg, var(--green),  transparent 70%); }
+/* card parts */
+.chard{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.csym{font-family:var(--display);font-size:17px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1}
+.cname{font-size:10px;color:var(--dim);margin-top:3px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cexch{font-size:9px;color:var(--dim);opacity:.6;margin-top:1px}
+.badge{font-size:9px;font-weight:500;padding:3px 7px;border-radius:4px;letter-spacing:.04em;white-space:nowrap;display:inline-block}
+.b-ath {background:rgba(74,222,128,.1); color:var(--green); border:1px solid rgba(74,222,128,.3)}
+.b-near{background:rgba(251,191,36,.1); color:var(--amber); border:1px solid rgba(251,191,36,.3)}
+.b-hit {background:rgba(248,113,113,.1); color:var(--red);   border:1px solid rgba(248,113,113,.3)}
+.b-deep{background:var(--s2); color:var(--dim); border:1px solid var(--b1)}
 
-/* Card skeleton loading */
-.card.loading .skel { background: var(--s2); border-radius: 4px; }
-.card.loading .skel-text  { height: 10px; width: 60%; margin-bottom: 6px; }
-.card.loading .skel-large { height: 20px; width: 80%; margin-bottom: 12px; }
-.card.loading .skel-line  { height: 8px; width: 100%; margin-bottom: 4px; }
+.cprices{display:flex;flex-direction:column;gap:5px;margin-bottom:9px}
+.crow{display:flex;justify-content:space-between;align-items:baseline}
+.clbl{font-size:10px;color:var(--dim);letter-spacing:.05em}
+.cval{font-size:14px;font-weight:500;letter-spacing:-.3px;color:#fff}
+.cval.live{color:var(--cyan)}
+.cval.athv{font-size:11px;color:var(--hi)}
+.cval.chg{font-size:11px}
+.pos{color:var(--green)}
+.neg{color:var(--red)}
 
-/* Card inner */
-.c-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-.c-sym  { font-family: var(--display); font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -.3px; line-height: 1; }
-.c-name { font-size: 10px; color: var(--dim); margin-top: 3px; line-height: 1.3; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.c-exch { font-size: 9px; color: var(--dim); opacity: .7; }
+.pbar{margin:8px 0}
+.pbg{height:3px;background:var(--s3);border-radius:2px;overflow:hidden}
+.pfill{height:100%;border-radius:2px;transition:width .6s ease}
+.pmeta{display:flex;justify-content:space-between;margin-top:4px}
+.ppct{font-size:10px;font-weight:500}
+.pzone{font-size:10px;color:var(--dim)}
 
-/* Badges */
-.badge { font-size: 9px; font-weight: 500; padding: 3px 7px; border-radius: 4px; letter-spacing: .04em; white-space: nowrap; }
-.b-ath  { background: var(--ath-bg);  color: var(--green); border: 1px solid var(--ath-bd); }
-.b-near { background: var(--near-bg); color: var(--amber); border: 1px solid var(--near-bd); }
-.b-hit  { background: var(--hit-bg);  color: var(--red);   border: 1px solid var(--hit-bd); }
-.b-deep { background: var(--s2); color: var(--dim); border: 1px solid var(--b1); }
+.rblock{margin-top:7px;padding:10px 12px;background:var(--s2);border:1px solid var(--b0);border-radius:7px;display:flex;justify-content:space-between;align-items:center}
+.rblock.rnear{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.05)}
+.rblock.rhit {border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.05)}
+.rlbl{font-size:9px;color:var(--dim);letter-spacing:.05em;margin-bottom:2px}
+.rpct{font-family:var(--display);font-size:22px;font-weight:800;line-height:1}
+.rdir{font-size:9px;margin-top:3px}
+.rprice{font-size:13px;font-weight:500;letter-spacing:-.2px}
+.rgap{font-size:9px;color:var(--dim);margin-top:3px}
+.rright{text-align:right}
 
-/* Price rows */
-.c-prices { display: flex; flex-direction: column; gap: 5px; margin-bottom: 9px; }
-.c-row { display: flex; justify-content: space-between; align-items: baseline; }
-.c-lbl  { font-size: 10px; color: var(--dim); letter-spacing: .05em; }
-.c-val  { font-size: 14px; font-weight: 500; letter-spacing: -.3px; color: #fff; }
-.c-val.live { color: var(--cyan); }
-.c-val.chg { font-size: 11px; }
-.c-val.pos { color: var(--green); }
-.c-val.neg { color: var(--red); }
-.c-val.ath-sub { font-size: 11px; color: var(--hi); }
-.c-note { font-size: 9px; color: var(--dim); text-align: right; margin-top: 1px; }
+.cerr{font-size:11px;color:var(--red);opacity:.7;text-align:center;padding:12px 0}
+.empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--dim);font-size:13px}
 
-/* Progress bar */
-.pbar-wrap { margin: 8px 0; }
-.pbar-bg { height: 3px; background: var(--s3); border-radius: 2px; overflow: hidden; }
-.pbar-fill { height: 100%; border-radius: 2px; transition: width .6s ease; }
-.pbar-meta { display: flex; justify-content: space-between; margin-top: 3px; }
-.pbar-pct { font-size: 10px; font-weight: 500; }
-.pbar-label { font-size: 10px; color: var(--dim); }
+.toast{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--s3);border:1px solid var(--b2);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--txt);opacity:0;transform:translateY(6px);transition:all .2s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
 
-/* Retracement block */
-.retrace {
-  margin-top: 7px; padding: 9px 11px;
-  background: var(--s2); border: 1px solid var(--b0);
-  border-radius: 7px; display: flex; justify-content: space-between; align-items: center;
-}
-.retrace.r-near { border-color: var(--near-bd); background: var(--near-bg); }
-.retrace.r-hit  { border-color: var(--hit-bd);  background: var(--hit-bg); }
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px}
 
-.r-left {}
-.r-lbl { font-size: 9px; color: var(--dim); letter-spacing: .05em; margin-bottom: 2px; }
-.r-pct { font-family: var(--display); font-size: 22px; font-weight: 800; line-height: 1; }
-.r-dir { font-size: 9px; margin-top: 3px; }
-
-.r-right { text-align: right; }
-.r-price { font-size: 13px; font-weight: 500; letter-spacing: -.2px; }
-.r-gap   { font-size: 9px; color: var(--dim); margin-top: 3px; }
-
-/* Error card */
-.c-err { font-size: 11px; color: var(--red); opacity: .8; text-align: center; padding: 8px 0; }
-
-/* Empty */
-.empty { grid-column: 1/-1; text-align: center; padding: 60px; color: var(--dim); font-size: 13px; }
-
-/* CORS warning banner */
-.cors-warn {
-  background: rgba(251,191,36,.07); border: 1px solid var(--near-bd);
-  border-radius: var(--r); padding: 12px 16px; margin-bottom: 16px;
-  font-size: 12px; color: var(--amber); line-height: 1.6; display: none;
-}
-.cors-warn code { background: rgba(255,255,255,.08); padding: 1px 5px; border-radius: 3px; font-family: var(--mono); font-size: 11px; }
-
-/* Toast */
-.toast {
-  position: fixed; bottom: 20px; right: 20px; z-index: 999;
-  background: var(--s3); border: 1px solid var(--b2);
-  border-radius: 8px; padding: 10px 16px; font-size: 12px;
-  color: var(--txt); opacity: 0; transform: translateY(6px);
-  transition: all .2s; pointer-events: none;
-}
-.toast.show { opacity: 1; transform: none; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--s3); border-radius: 3px; }
+@media(max-width:540px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -234,366 +160,275 @@ body { background: var(--bg); color: var(--txt); font-family: var(--mono); min-h
 <header class="hdr">
   <div>
     <div class="brand">ATH<em>·</em>RADAR</div>
-    <div class="status">
-      <span class="live-dot loading" id="dot"></span>
-      <span id="status-txt">Initialising...</span>
+    <div class="status-row">
+      <span class="dot spin" id="dot"></span>
+      <span id="stxt">Initialising...</span>
     </div>
   </div>
-  <button class="btn-refresh" id="refresh-btn" onclick="doRefresh()">
-    <svg id="refresh-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <button class="btn go" id="rbtn" onclick="doRefresh()">
+    <svg id="rico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.79"/>
     </svg>
     Refresh prices
   </button>
 </header>
 
-<div class="cors-warn" id="cors-warn">
-  <strong>⚡ Running from local file?</strong> Prices may be blocked by browser CORS policy.
-  Serve this file via a local server: <code>python3 -m http.server 8000</code> then open <code>http://localhost:8000</code>
-  — or host it on any web server and it will work fine.
-</div>
-
 <div class="ctrl">
-  <div class="search-box">
+  <div class="sbox">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     <input type="text" id="q" placeholder="Ticker or name..." oninput="render()">
   </div>
-  <button class="filter-pill" id="f-near" onclick="toggleNear()">⚡ Near retracement</button>
-  <div class="margin-group">
+  <button class="fpill" id="fnear" onclick="toggleF('near')">⚡ Near retracement</button>
+  <div class="mgrp">
     <span>Margin ±</span>
     <input type="number" id="margin" value="3" min="0.5" max="20" step="0.5" oninput="render()">
     <span>%</span>
   </div>
-  <button class="filter-pill" id="f-ath" onclick="toggleATH()">★ Near ATH</button>
+  <button class="fpill" id="fath" onclick="toggleF('ath')">★ Near ATH</button>
 </div>
 
 <div class="sumbar" id="sumbar"></div>
-<div class="grid" id="grid"></div>
+<div class="grid"  id="grid"></div>
 
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
+/* ── Data ──────────────────────────────────────────────────────────────── */
 const STOCKS = [
-  {sym:'AAPL', name:'Apple Inc',          exch:'NASDAQ'},
-  {sym:'AMD',  name:'Adv Micro Devices',  exch:'NASDAQ'},
-  {sym:'AMZN', name:'Amazon',             exch:'NASDAQ'},
-  {sym:'ASML', name:'ASML Holding',       exch:'NASDAQ'},
-  {sym:'BABA', name:'Alibaba Group',      exch:'NYSE'  },
-  {sym:'COIN', name:'Coinbase Global',    exch:'NASDAQ'},
-  {sym:'CRCL', name:'Circle Internet',    exch:'NYSE'  },
-  {sym:'DELL', name:'Dell Technologies',  exch:'NYSE'  },
-  {sym:'DRAM', name:'Roundhill Memory',   exch:'CBOE'  },
-  {sym:'EBAY', name:'eBay Inc',           exch:'NASDAQ'},
-  {sym:'GOOGL',name:'Alphabet Class A',   exch:'NASDAQ'},
-  {sym:'HOOD', name:'Robinhood Markets',  exch:'NASDAQ'},
-  {sym:'IBM',  name:'IBM',                exch:'NYSE'  },
-  {sym:'INTC', name:'Intel Corp',         exch:'NASDAQ'},
-  {sym:'META', name:'Meta Platforms',     exch:'NASDAQ'},
-  {sym:'MRVL', name:'Marvell Technology', exch:'NASDAQ'},
-  {sym:'MSFT', name:'Microsoft',          exch:'NASDAQ'},
-  {sym:'MSTR', name:'Strategy Inc',       exch:'NASDAQ'},
-  {sym:'MU',   name:'Micron Technology',  exch:'NASDAQ'},
-  {sym:'NVDA', name:'NVIDIA Corp',        exch:'NASDAQ'},
-  {sym:'ORCL', name:'Oracle Corp',        exch:'NYSE'  },
-  {sym:'PLTR', name:'Palantir Tech',      exch:'NASDAQ'},
-  {sym:'RKLB', name:'Rocket Lab Corp',    exch:'NASDAQ'},
-  {sym:'SNDL', name:'SNDL Inc',           exch:'NASDAQ'},
-  {sym:'TSLA', name:'Tesla Inc',          exch:'NASDAQ'},
-  {sym:'XLE',  name:'Energy SPDR ETF',    exch:'NYSE'  },
+  {sym:'AAPL',name:'Apple Inc',         exch:'NASDAQ'},
+  {sym:'AMD', name:'Adv Micro Devices', exch:'NASDAQ'},
+  {sym:'AMZN',name:'Amazon',            exch:'NASDAQ'},
+  {sym:'ASML',name:'ASML Holding',      exch:'NASDAQ'},
+  {sym:'BABA',name:'Alibaba Group',     exch:'NYSE'  },
+  {sym:'COIN',name:'Coinbase Global',   exch:'NASDAQ'},
+  {sym:'CRCL',name:'Circle Internet',   exch:'NYSE'  },
+  {sym:'DELL',name:'Dell Technologies', exch:'NYSE'  },
+  {sym:'DRAM',name:'Roundhill Memory',  exch:'CBOE'  },
+  {sym:'EBAY',name:'eBay Inc',          exch:'NASDAQ'},
+  {sym:'GOOGL',name:'Alphabet A',       exch:'NASDAQ'},
+  {sym:'HOOD',name:'Robinhood Markets', exch:'NASDAQ'},
+  {sym:'IBM', name:'IBM',               exch:'NYSE'  },
+  {sym:'INTC',name:'Intel Corp',        exch:'NASDAQ'},
+  {sym:'META',name:'Meta Platforms',    exch:'NASDAQ'},
+  {sym:'MRVL',name:'Marvell Technology',exch:'NASDAQ'},
+  {sym:'MSFT',name:'Microsoft',         exch:'NASDAQ'},
+  {sym:'MSTR',name:'Strategy Inc',      exch:'NASDAQ'},
+  {sym:'MU',  name:'Micron Technology', exch:'NASDAQ'},
+  {sym:'NVDA',name:'NVIDIA Corp',       exch:'NASDAQ'},
+  {sym:'ORCL',name:'Oracle Corp',       exch:'NYSE'  },
+  {sym:'PLTR',name:'Palantir Tech',     exch:'NASDAQ'},
+  {sym:'RKLB',name:'Rocket Lab Corp',   exch:'NASDAQ'},
+  {sym:'SNDL',name:'SNDL Inc',          exch:'NASDAQ'},
+  {sym:'TSLA',name:'Tesla Inc',         exch:'NASDAQ'},
+  {sym:'XLE', name:'Energy SPDR ETF',   exch:'NYSE'  },
 ];
 
-// Known ATHs (all-time, not just 52-week). Yahoo's fiftyTwoWeekHigh is used as a live floor
-// and these are the known historical ATHs where they exceed Yahoo's 52-week figure.
-const KNOWN_ATH = {
-  AAPL: 315.00, AMD: 527.20, AMZN: 278.56, BABA: 192.67,
-  COIN: 444.65, CRCL: 298.99, GOOGL: 408.61, HOOD: 153.86,
-  META: 796.25, MSFT: 555.45, MSTR: 543.00, NVDA: 236.54,
-  ORCL: 345.72, PLTR: 207.52, RKLB: 151.00, TSLA: 498.83,
+// Historical ATHs that exceed Yahoo's 52-week window
+const HIST_ATH = {
+  AAPL:315.00, AMD:527.20, AMZN:278.56, BABA:192.67,
+  COIN:444.65, CRCL:298.99, GOOGL:408.61, HOOD:153.86,
+  META:796.25, MSFT:555.45, MSTR:543.00, NVDA:236.54,
+  ORCL:345.72, PLTR:207.52, RKLB:151.00, TSLA:498.83,
 };
 
-const LEVELS = [5, 10, 15, 20, 25, 30, 40, 50];
-let data = {};    // sym -> {price, ath, chg, chgPct, name}
-let nearOn = false, athOn = false, loading = false;
+// CORS proxy — works from any origin including file://
+const PROXY = 'https://cors-anywhere.fly.dev/';
 
-// ── Fetch ────────────────────────────────────────────────────────────────────
-async function fetchSym(sym) {
-  const url = `https://query2.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d&includePrePost=false`;
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`${r.status}`);
-  const d = await r.json();
-  const meta = d.chart.result[0].meta;
-  const price = meta.regularMarketPrice;
-  const prev  = meta.regularMarketPreviousClose || meta.previousClose || price;
-  const hi52  = meta.fiftyTwoWeekHigh || price;
-  // ATH = max of our known value and Yahoo's 52-week high
-  const knownATH = KNOWN_ATH[sym];
-  const ath = knownATH ? Math.max(knownATH, hi52) : hi52;
-  const chg     = price - prev;
-  const chgPct  = prev ? ((chg / prev) * 100) : 0;
-  return { price, ath, hi52, chg, chgPct };
+const LEVELS = [5,10,15,20,25,30,40,50];
+let live = {};        // sym -> {price, ath, chg, chgPct}
+let busy = false;
+let fNear = false, fATH = false;
+
+/* ── Fetch ─────────────────────────────────────────────────────────────── */
+async function fetchOne(sym) {
+  const yahoo = `https://query2.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`;
+  const res = await fetch(PROXY + yahoo, {
+    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+  });
+  if (!res.ok) throw new Error(res.status);
+  const d = await res.json();
+  const m = d.chart.result[0].meta;
+  const price = m.regularMarketPrice;
+  const prev  = m.regularMarketPreviousClose || m.previousClose || price;
+  const hi52  = m.fiftyTwoWeekHigh || price;
+  const ha    = HIST_ATH[sym];
+  const ath   = ha ? Math.max(ha, hi52) : hi52;
+  return { price, ath, chg: price-prev, chgPct: prev ? (price-prev)/prev*100 : 0 };
 }
 
 async function doRefresh() {
-  if (loading) return;
-  loading = true;
-  const btn = document.getElementById('refresh-btn');
-  const icon = document.getElementById('refresh-icon');
-  btn.classList.add('spinning');
-  btn.disabled = true;
-  setDot('loading', 'Fetching live prices...');
+  if (busy) return;
+  busy = true;
+  const btn = document.getElementById('rbtn');
+  btn.classList.add('spinning'); btn.disabled = true;
+  setDot('spin','Fetching live prices…');
   renderSkeletons();
 
-  const results = await Promise.allSettled(
-    STOCKS.map(s => fetchSym(s.sym).then(r => ({ sym: s.sym, ...r })))
+  const settled = await Promise.allSettled(
+    STOCKS.map(s => fetchOne(s.sym).then(r => ({ok:true, sym:s.sym, ...r})))
   );
 
-  let ok = 0, corsBlocked = 0;
-  results.forEach(r => {
-    if (r.status === 'fulfilled') {
-      data[r.value.sym] = r.value;
-      ok++;
-    } else {
-      const msg = r.reason?.message || '';
-      if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('CORS')) {
-        corsBlocked++;
-      }
-      data[r.reason?.sym] = null;
+  let ok = 0;
+  settled.forEach(r => {
+    if (r.status === 'fulfilled' && r.value.ok) {
+      live[r.value.sym] = r.value; ok++;
     }
   });
 
-  if (corsBlocked > 3) {
-    document.getElementById('cors-warn').style.display = 'block';
-    setDot('error', `CORS blocked — serve via HTTP server`);
+  const now = new Date();
+  const ts  = now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  if (ok === 0) {
+    setDot('err','Failed to load — check connection & retry');
   } else if (ok < 20) {
-    setDot('error', `Partial load: ${ok}/${STOCKS.length} — refresh to retry`);
+    setDot('spin',`Partial: ${ok}/${STOCKS.length} loaded · ${ts}`);
   } else {
-    document.getElementById('cors-warn').style.display = 'none';
-    const now = new Date();
-    const t = now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit', second:'2-digit' });
-    setDot('ok', `Live · updated ${t} ET · ${ok}/${STOCKS.length} loaded`);
+    setDot('','Live · ${ts} ET · ${ok}/${STOCKS.length}');
+    document.getElementById('dot').className = 'dot';
+    document.getElementById('stxt').textContent = `Live · ${ts} ET · ${ok}/${STOCKS.length} loaded`;
   }
 
-  btn.classList.remove('spinning');
-  btn.disabled = false;
-  loading = false;
+  btn.classList.remove('spinning'); btn.disabled = false;
+  busy = false;
   render();
   toast(`${ok}/${STOCKS.length} prices refreshed`);
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-function setDot(state, txt) {
-  const d = document.getElementById('dot');
-  d.className = 'live-dot' + (state !== 'ok' ? ' ' + state : '');
-  document.getElementById('status-txt').textContent = txt;
+/* ── Helpers ────────────────────────────────────────────────────────────── */
+function setDot(cls, txt) {
+  document.getElementById('dot').className = 'dot' + (cls ? ' '+cls : '');
+  document.getElementById('stxt').textContent = txt;
 }
+const fp = n => n==null ? '—' : n>=1000 ? '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '$'+n.toFixed(2);
+const barC = pct => { const a=Math.abs(pct); return a<=5?'var(--green)':a<=12?'var(--cyan)':a<=22?'var(--amber)':a<=35?'var(--orange)':'var(--red)'; };
 
-function fp(n) {
-  if (n == null) return '—';
-  if (n >= 1000) return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-  return '$' + n.toFixed(2);
-}
-function fchg(n, pct) {
-  if (n == null) return '';
-  const s = (n >= 0 ? '+' : '') + n.toFixed(2);
-  const p = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
-  return `${s} (${p})`;
-}
-function barColor(pct) {
-  const a = Math.abs(pct);
-  if (a <= 5)  return 'var(--green)';
-  if (a <= 12) return 'var(--cyan)';
-  if (a <= 20) return 'var(--amber)';
-  if (a <= 35) return 'var(--orange)';
-  return 'var(--red)';
-}
-function nearestLevel(price, ath) {
-  if (!price || !ath) return null;
-  const pctDown = ((ath - price) / ath) * 100;
-  let best = null, bestDist = Infinity;
-  for (const lvl of LEVELS) {
-    const d = Math.abs(pctDown - lvl);
-    if (d < bestDist) { bestDist = d; best = lvl; }
-  }
+function nearestLvl(price, ath) {
+  if (!price||!ath) return null;
+  const pd = ((ath-price)/ath)*100;
+  let best=null, bd=Infinity;
+  for (const l of LEVELS) { const d=Math.abs(pd-l); if(d<bd){bd=d;best=l;} }
   return best;
 }
-function isNearAny(price, ath, margin) {
-  if (!price || !ath || margin <= 0) return false;
-  const pctDown = ((ath - price) / ath) * 100;
-  return LEVELS.some(lvl => Math.abs(pctDown - lvl) <= margin);
+function isNear(price, ath, margin) {
+  if (!price||!ath||margin<=0) return false;
+  const pd=((ath-price)/ath)*100;
+  return LEVELS.some(l => Math.abs(pd-l)<=margin);
 }
 function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2400);
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2400);
 }
-
-function toggleNear() {
-  nearOn = !nearOn;
-  document.getElementById('f-near').classList.toggle('on', nearOn);
-  if (nearOn) { athOn = false; document.getElementById('f-ath').classList.remove('on'); }
-  render();
-}
-function toggleATH() {
-  athOn = !athOn;
-  document.getElementById('f-ath').classList.toggle('on', athOn);
-  if (athOn) { nearOn = false; document.getElementById('f-near').classList.remove('on'); }
+function toggleF(f) {
+  if (f==='near') { fNear=!fNear; document.getElementById('fnear').classList.toggle('on',fNear); if(fNear){fATH=false;document.getElementById('fath').classList.remove('on');} }
+  else             { fATH=!fATH;  document.getElementById('fath').classList.toggle('on',fATH);  if(fATH){fNear=false;document.getElementById('fnear').classList.remove('on');} }
   render();
 }
 
-// ── Skeleton ──────────────────────────────────────────────────────────────────
+/* ── Skeleton ───────────────────────────────────────────────────────────── */
 function renderSkeletons() {
-  document.getElementById('grid').innerHTML = STOCKS.map(s => `
-    <div class="card loading">
-      <div class="c-head"><div><div class="skel skel-text"></div><div class="skel skel-large"></div></div></div>
-      <div class="skel skel-line"></div><div class="skel skel-line"></div><div class="skel skel-line" style="margin-top:6px"></div>
-    </div>`).join('');
+  document.getElementById('grid').innerHTML = STOCKS.map(() =>
+    `<div class="card"><div class="skel sk-t"></div><div class="skel sk-l"></div><div class="skel sk-s"></div><div class="skel sk-m"></div><div class="skel sk-b"></div></div>`
+  ).join('');
 }
 
-// ── Render ────────────────────────────────────────────────────────────────────
+/* ── Render ─────────────────────────────────────────────────────────────── */
 function render() {
   const q      = document.getElementById('q').value.toLowerCase();
   const margin = parseFloat(document.getElementById('margin').value) || 3;
-
-  let total=0, loaded=0, nearCount=0, athCount=0;
-  const toShow = [];
+  let totalLoad=0, nearCnt=0, athCnt=0;
+  const show = [];
 
   for (const s of STOCKS) {
-    total++;
-    const d = data[s.sym];
-    if (d) loaded++;
-
-    const price = d?.price, ath = d?.ath;
-    const pctFromATH = (price && ath) ? ((price - ath) / ath) * 100 : null;
-    const near  = isNearAny(price, ath, margin);
-    const atATH = pctFromATH != null && pctFromATH >= -2;
-    if (near)  nearCount++;
-    if (atATH) athCount++;
-
+    const d = live[s.sym];
+    if (d) totalLoad++;
+    const price=d?.price, ath=d?.ath;
+    const pfa = (price&&ath) ? ((price-ath)/ath)*100 : null;
+    const near = isNear(price,ath,margin);
+    const atH  = pfa!=null && pfa>=-2;
+    if (near) nearCnt++;
+    if (atH)  athCnt++;
     if (q && !s.sym.toLowerCase().includes(q) && !s.name.toLowerCase().includes(q)) continue;
-    if (nearOn && !near) continue;
-    if (athOn  && !atATH) continue;
-    toShow.push({ s, d, pctFromATH, near, atATH });
+    if (fNear && !near) continue;
+    if (fATH  && !atH)  continue;
+    show.push({s,d,pfa,near,atH});
   }
 
-  // Summary bar
-  document.getElementById('sumbar').innerHTML = [
-    `<div class="sum-pill"><b>${loaded}</b> live prices</div>`,
-    `<div class="sum-pill"><b>${athCount}</b> near ATH (&lt;2%)</div>`,
-    `<div class="sum-pill warn"><b>${nearCount}</b> near retracement ±${margin}%</div>`,
-    `<div class="sum-pill"><b>${toShow.length}</b> shown</div>`,
-  ].join('');
+  document.getElementById('sumbar').innerHTML =
+    `<div class="spill"><b>${totalLoad}</b> live prices</div>`+
+    `<div class="spill"><b>${athCnt}</b> near ATH (&lt;2%)</div>`+
+    `<div class="spill warn"><b>${nearCnt}</b> near retracement ±${margin}%</div>`+
+    `<div class="spill"><b>${show.length}</b> shown</div>`;
 
-  if (!toShow.length) {
-    document.getElementById('grid').innerHTML = '<div class="empty">No stocks match your filter.</div>';
+  if (!show.length) {
+    document.getElementById('grid').innerHTML='<div class="empty">No stocks match your filter.</div>';
     return;
   }
-
-  document.getElementById('grid').innerHTML = toShow.map(({ s, d, pctFromATH, near, atATH }) => {
-    if (!d) return errCard(s);
-    return buildCard(s, d, pctFromATH, near, atATH, margin);
-  }).join('');
+  document.getElementById('grid').innerHTML = show.map(({s,d,pfa,near,atH}) =>
+    d ? buildCard(s,d,pfa,near,atH,margin) : errCard(s)
+  ).join('');
 }
 
 function errCard(s) {
-  return `<div class="card">
-    <div class="c-head">
-      <div><div class="c-sym">${s.sym}</div><div class="c-name">${s.name}</div></div>
-    </div>
-    <div class="c-err">Price unavailable — refresh to retry</div>
-  </div>`;
+  return `<div class="card"><div class="chard"><div><div class="csym">${s.sym}</div><div class="cname">${s.name}</div></div></div><div class="cerr">Price unavailable — refresh to retry</div></div>`;
 }
 
-function buildCard(s, d, pctFromATH, near, atATH, margin) {
-  const { price, ath, chg, chgPct } = d;
-  const lvl      = nearestLevel(price, ath);
-  const retPx    = lvl != null ? ath * (1 - lvl / 100) : null;
-  const distPct  = (retPx != null) ? ((price - retPx) / retPx) * 100 : null;
-  const isHit    = retPx != null && price <= retPx;
-  const isNear   = near && !isHit;
-
-  const fillW    = pctFromATH != null ? Math.min(100, Math.abs(pctFromATH) * 2) : 0;
-  const fillC    = barColor(pctFromATH ?? -100);
-
-  // Card state class
-  const cardCls  = atATH ? 'card ath' : isHit ? 'card hit' : near ? 'card near' : 'card';
-
-  // Badge
-  const badge = atATH
-    ? '<span class="badge b-ath">★ ATH</span>'
-    : isHit
-    ? '<span class="badge b-hit">LEVEL HIT</span>'
-    : near
-    ? '<span class="badge b-near">⚡ NEAR</span>'
-    : (pctFromATH != null && pctFromATH < -40)
-    ? '<span class="badge b-deep">DEEP</span>'
-    : '';
-
-  const chgCls = chg >= 0 ? 'c-val chg pos' : 'c-val chg neg';
-
-  const retraceCls = isHit ? 'retrace r-hit' : near ? 'retrace r-near' : 'retrace';
-  const rPctColor  = isHit ? 'var(--red)' : near ? 'var(--amber)' : fillC;
-  const dirLabel   = distPct != null
-    ? (distPct < 0
-        ? `${Math.abs(distPct).toFixed(1)}% below — breached`
-        : `${distPct.toFixed(1)}% above level`)
-    : '';
-  const dirColor   = distPct != null ? (distPct < 0 ? 'var(--red)' : 'var(--green)') : 'var(--dim)';
-  const gap        = (price != null && retPx != null) ? Math.abs(price - retPx) : null;
-
+function buildCard(s,d,pfa,near,atH,margin) {
+  const {price,ath,chg,chgPct} = d;
+  const lvl   = nearestLvl(price,ath);
+  const retPx = lvl!=null ? ath*(1-lvl/100) : null;
+  const dist  = (retPx!=null) ? ((price-retPx)/retPx)*100 : null;
+  const isHit = retPx!=null && price<=retPx;
+  const isNearLvl = near && !isHit;
+  const fillW = pfa!=null ? Math.min(100,Math.abs(pfa)*2) : 0;
+  const fc    = barC(pfa??-100);
+  const cc    = atH?'card c-ath':isHit?'card c-hit':near?'card c-near':'card';
+  const badge = atH?'<span class="badge b-ath">★ ATH</span>':isHit?'<span class="badge b-hit">LEVEL HIT</span>':near?'<span class="badge b-near">⚡ NEAR</span>':pfa!=null&&pfa<-40?'<span class="badge b-deep">DEEP</span>':'';
+  const rbc   = isHit?'rblock rhit':near?'rblock rnear':'rblock';
+  const rcc   = isHit?'var(--red)':near?'var(--amber)':fc;
+  const dirC  = dist!=null?(dist<0?'var(--red)':'var(--green)'):'var(--dim)';
+  const dirL  = dist!=null?(dist<0?`${Math.abs(dist).toFixed(1)}% below — breached`:`${dist.toFixed(1)}% above level`):'';
+  const gap   = (price!=null&&retPx!=null)?Math.abs(price-retPx):null;
+  const chgCls= chg>=0?'cval chg pos':'cval chg neg';
+  const chgStr= chg!=null?(chg>=0?'+':'')+chg.toFixed(2)+' ('+(chgPct>=0?'+':'')+chgPct.toFixed(2)+'%)':'';
   return `
-<div class="${cardCls}">
-  <div class="c-head">
+<div class="${cc}">
+  <div class="chard">
     <div>
-      <div class="c-sym">${s.sym}</div>
-      <div class="c-name">${s.name}</div>
-      <div class="c-exch">${s.exch}</div>
+      <div class="csym">${s.sym}</div>
+      <div class="cname">${s.name}</div>
+      <div class="cexch">${s.exch}</div>
     </div>
     <div>${badge}</div>
   </div>
-
-  <div class="c-prices">
-    <div class="c-row">
-      <span class="c-lbl">LIVE PRICE</span>
-      <span class="c-val live">${fp(price)}</span>
-    </div>
-    <div class="c-row">
-      <span class="c-lbl"></span>
-      <span class="${chgCls}">${fchg(chg, chgPct)}</span>
-    </div>
-    <div class="c-row" style="margin-top:3px">
-      <span class="c-lbl">ALL-TIME HIGH</span>
-      <span class="c-val ath-sub">${fp(ath)}</span>
+  <div class="cprices">
+    <div class="crow"><span class="clbl">LIVE PRICE</span><span class="cval live">${fp(price)}</span></div>
+    <div class="crow"><span></span><span class="${chgCls}">${chgStr}</span></div>
+    <div class="crow" style="margin-top:3px"><span class="clbl">ALL-TIME HIGH</span><span class="cval athv">${fp(ath)}</span></div>
+  </div>
+  <div class="pbar">
+    <div class="pbg"><div class="pfill" style="width:${fillW.toFixed(1)}%;background:${fc}"></div></div>
+    <div class="pmeta">
+      <span class="ppct" style="color:${fc}">${pfa!=null?(pfa>=0?'+':'')+pfa.toFixed(2)+'% from ATH':'—'}</span>
+      <span class="pzone">${lvl!=null?lvl+'% zone':''}</span>
     </div>
   </div>
-
-  <div class="pbar-wrap">
-    <div class="pbar-bg">
-      <div class="pbar-fill" style="width:${fillW.toFixed(1)}%;background:${fillC}"></div>
+  <div class="${rbc}">
+    <div>
+      <div class="rlbl">NEAREST LEVEL</div>
+      <div class="rpct" style="color:${rcc}">${lvl!=null?lvl+'%':'—'}</div>
+      <div class="rdir" style="color:${dirC}">${dirL}</div>
     </div>
-    <div class="pbar-meta">
-      <span class="pbar-pct" style="color:${fillC}">${pctFromATH != null ? (pctFromATH >= 0 ? '+' : '') + pctFromATH.toFixed(2) + '% from ATH' : '—'}</span>
-      <span class="pbar-label">${lvl != null ? lvl + '% zone' : ''}</span>
-    </div>
-  </div>
-
-  <div class="${retraceCls}">
-    <div class="r-left">
-      <div class="r-lbl">NEAREST LEVEL</div>
-      <div class="r-pct" style="color:${rPctColor}">${lvl != null ? lvl + '%' : '—'}</div>
-      <div class="r-dir" style="color:${dirColor}">${dirLabel}</div>
-    </div>
-    <div class="r-right">
-      <div class="r-lbl" style="text-align:right">RETRACE PRICE</div>
-      <div class="r-price" style="color:${rPctColor}">${fp(retPx)}</div>
-      <div class="r-gap">${gap != null ? fp(gap) + ' gap' : ''}</div>
+    <div class="rright">
+      <div class="rlbl">RETRACE PRICE</div>
+      <div class="rprice" style="color:${rcc}">${fp(retPx)}</div>
+      <div class="rgap">${gap!=null?fp(gap)+' gap':''}</div>
     </div>
   </div>
 </div>`;
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+/* ── Init ─────────────────────────────────────────────────────────────── */
 doRefresh();
 </script>
 </body>
