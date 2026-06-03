@@ -9,34 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:      #090b0f;
-  --s1:      #0f1218;
-  --s2:      #161b23;
-  --s3:      #1e2530;
-  --b0:      rgba(255,255,255,0.05);
-  --b1:      rgba(255,255,255,0.09);
-  --b2:      rgba(255,255,255,0.16);
-  --txt:     #dde1ea;
-  --dim:     #5a6170;
-  --hi:      #a8b5c8;
-  --green:   #4ade80;
-  --cyan:    #22d3ee;
-  --amber:   #fbbf24;
-  --orange:  #f97316;
-  --red:     #f87171;
-  --mono:    'DM Mono', monospace;
-  --display: 'Syne', sans-serif;
-  --r:       10px;
-  --rsm:     6px;
+  --bg:#090b0f;--s1:#0f1218;--s2:#161b23;--s3:#1e2530;
+  --b0:rgba(255,255,255,0.05);--b1:rgba(255,255,255,0.09);--b2:rgba(255,255,255,0.16);
+  --txt:#dde1ea;--dim:#5a6170;--hi:#a8b5c8;
+  --green:#4ade80;--cyan:#22d3ee;--amber:#fbbf24;--orange:#f97316;--red:#f87171;
+  --mono:'DM Mono',monospace;--display:'Syne',sans-serif;--r:10px;--rsm:6px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:13px}
 body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:100vh}
 ::selection{background:rgba(34,211,238,.2)}
-
 .wrap{max-width:1440px;margin:0 auto;padding:24px 18px 80px}
 
-/* ── Header ── */
+/* Header */
 .hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
 .brand{font-family:var(--display);font-size:21px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1}
 .brand em{color:var(--cyan);font-style:normal}
@@ -46,17 +31,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 .dot.err{background:var(--red);animation:none}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-/* ── Buttons ── */
+/* Buttons */
 .btn{font-family:var(--mono);font-size:11px;font-weight:500;padding:9px 18px;border-radius:var(--rsm);border:1px solid var(--b2);background:var(--s2);color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:7px;transition:background .15s,border-color .15s;white-space:nowrap}
 .btn:hover{background:var(--s3)}
 .btn:active{transform:scale(.97)}
 .btn.go{background:var(--cyan);color:#000;border-color:var(--cyan);font-weight:700}
 .btn.go:hover{background:#1bc8e4}
-.btn svg{transition:transform .1s}
 .btn.spinning svg{animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── Controls ── */
+/* Controls */
 .ctrl{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
 .sbox{position:relative;flex:1;min-width:160px;max-width:260px}
 .sbox svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--dim);pointer-events:none}
@@ -71,19 +55,20 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 .mgrp input{font-family:var(--mono);font-size:12px;width:58px;text-align:center;background:var(--s1);border:1px solid var(--b0);color:var(--txt);border-radius:var(--rsm);padding:7px 8px;outline:none;-moz-appearance:textfield}
 .mgrp input::-webkit-inner-spin-button,.mgrp input::-webkit-outer-spin-button{-webkit-appearance:none}
 .mgrp input:focus{border-color:var(--b2)}
+.ctrl select{font-family:var(--mono);font-size:11px;background:var(--s1);border:1px solid var(--b0);color:var(--dim);border-radius:var(--rsm);padding:8px 10px;outline:none;cursor:pointer}
 
-/* ── Summary ── */
+/* Summary */
 .sumbar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
 .spill{font-size:11px;color:var(--dim);background:var(--s1);border:1px solid var(--b0);border-radius:20px;padding:4px 12px;display:flex;align-items:center;gap:5px}
 .spill b{color:var(--hi);font-weight:500}
 .spill.warn{border-color:rgba(251,191,36,.3);color:var(--amber)}
 .spill.warn b{color:var(--amber)}
 
-/* ── Grid ── */
+/* Grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:11px}
 
-/* ── Card ── */
-.card{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);padding:15px 15px 13px;display:flex;flex-direction:column;transition:border-color .2s,transform .15s;position:relative;overflow:hidden}
+/* Card */
+.card{background:var(--s1);border:1px solid var(--b0);border-radius:var(--r);padding:15px 15px 13px;display:flex;flex-direction:column;transition:border-color .2s,transform .15s;position:relative;overflow:hidden;cursor:pointer}
 .card:hover{border-color:var(--b2);transform:translateY(-1px)}
 .card.c-near{border-color:rgba(251,191,36,.35);background:color-mix(in srgb,var(--s1) 93%,#fbbf24)}
 .card.c-hit {border-color:rgba(248,113,113,.35);background:color-mix(in srgb,var(--s1) 93%,#f87171)}
@@ -93,7 +78,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 .card.c-hit::before {background:linear-gradient(90deg,var(--red),  transparent 65%)}
 .card.c-ath::before {background:linear-gradient(90deg,var(--green), transparent 65%)}
 
-/* skeleton */
+/* Skeleton */
 .skel{background:var(--s2);border-radius:4px;animation:shimmer 1.4s ease infinite}
 @keyframes shimmer{0%,100%{opacity:.4}50%{opacity:.9}}
 .sk-t{height:9px;width:55%;margin-bottom:6px}
@@ -102,17 +87,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 .sk-m{height:7px;width:70%;margin-bottom:14px}
 .sk-b{height:46px;width:100%;border-radius:7px}
 
-/* card parts */
+/* Card parts */
 .chard{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
 .csym{font-family:var(--display);font-size:17px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1}
 .cname{font-size:10px;color:var(--dim);margin-top:3px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cexch{font-size:9px;color:var(--dim);opacity:.6;margin-top:1px}
 .badge{font-size:9px;font-weight:500;padding:3px 7px;border-radius:4px;letter-spacing:.04em;white-space:nowrap;display:inline-block}
-.b-ath {background:rgba(74,222,128,.1); color:var(--green); border:1px solid rgba(74,222,128,.3)}
-.b-near{background:rgba(251,191,36,.1); color:var(--amber); border:1px solid rgba(251,191,36,.3)}
-.b-hit {background:rgba(248,113,113,.1); color:var(--red);   border:1px solid rgba(248,113,113,.3)}
-.b-deep{background:var(--s2); color:var(--dim); border:1px solid var(--b1)}
-
+.b-ath {background:rgba(74,222,128,.1); color:var(--green);border:1px solid rgba(74,222,128,.3)}
+.b-near{background:rgba(251,191,36,.1); color:var(--amber);border:1px solid rgba(251,191,36,.3)}
+.b-hit {background:rgba(248,113,113,.1);color:var(--red);  border:1px solid rgba(248,113,113,.3)}
+.b-deep{background:var(--s2);color:var(--dim);border:1px solid var(--b1)}
 .cprices{display:flex;flex-direction:column;gap:5px;margin-bottom:9px}
 .crow{display:flex;justify-content:space-between;align-items:baseline}
 .clbl{font-size:10px;color:var(--dim);letter-spacing:.05em}
@@ -124,14 +108,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 .cval.chg{font-size:11px}
 .pos{color:var(--green)}
 .neg{color:var(--red)}
-
 .pbar{margin:8px 0}
 .pbg{height:3px;background:var(--s3);border-radius:2px;overflow:hidden}
 .pfill{height:100%;border-radius:2px;transition:width .6s ease}
 .pmeta{display:flex;justify-content:space-between;margin-top:4px}
 .ppct{font-size:10px;font-weight:500}
 .pzone{font-size:10px;color:var(--dim)}
-
 .rblock{margin-top:7px;padding:10px 12px;background:var(--s2);border:1px solid var(--b0);border-radius:7px;display:flex;justify-content:space-between;align-items:center}
 .rblock.rnear{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.05)}
 .rblock.rhit {border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.05)}
@@ -142,16 +124,59 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 .rgap{font-size:9px;color:var(--dim);margin-top:3px}
 .rright{text-align:right}
 
+/* ── Expand panel (all levels) ── */
+.expand-hint{text-align:center;font-size:9px;color:var(--dim);margin-top:8px;letter-spacing:.05em;opacity:.6}
+.levels-panel{display:none;margin-top:10px;border-top:1px solid var(--b0);padding-top:10px}
+.levels-panel.open{display:block}
+.levels-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.lrow{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-radius:5px;background:var(--s2);border:1px solid var(--b0)}
+.lrow.breached{border-color:rgba(248,113,113,.25);background:rgba(248,113,113,.05)}
+.lrow.active-zone{border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.04)}
+.lpct{font-size:10px;font-weight:500;color:var(--hi)}
+.lrow.breached .lpct{color:var(--red)}
+.lrow.active-zone .lpct{color:var(--amber)}
+.lprice{font-size:10px;color:var(--txt)}
+.lcheck{font-size:11px;margin-left:4px}
+.lrow.breached .lcheck{color:var(--red)}
+
+/* ── Alert modal ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--s2);border:1px solid var(--b2);border-radius:14px;padding:24px;width:340px;max-width:95vw;position:relative}
+.modal-title{font-family:var(--display);font-size:16px;font-weight:800;color:#fff;margin-bottom:4px}
+.modal-sym{font-size:11px;color:var(--dim);margin-bottom:18px}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer;line-height:1;padding:4px}
+.modal-close:hover{color:var(--txt)}
+.modal label{display:block;font-size:10px;color:var(--dim);letter-spacing:.05em;margin-bottom:6px}
+.modal input[type=number]{width:100%;font-family:var(--mono);font-size:14px;background:var(--s1);border:1px solid var(--b1);color:var(--txt);border-radius:var(--rsm);padding:10px 12px;outline:none;margin-bottom:6px;-moz-appearance:textfield}
+.modal input[type=number]::-webkit-inner-spin-button,.modal input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+.modal input[type=number]:focus{border-color:var(--cyan)}
+.modal-hint{font-size:10px;color:var(--dim);margin-bottom:16px;line-height:1.5}
+.modal-price-ref{font-size:11px;color:var(--hi);margin-bottom:14px;padding:8px 10px;background:var(--s1);border-radius:5px;border:1px solid var(--b0)}
+.modal-actions{display:flex;gap:8px}
+.modal-actions button{flex:1;font-family:var(--mono);font-size:11px;font-weight:600;padding:9px;border-radius:var(--rsm);cursor:pointer;transition:all .15s;border:1px solid var(--b1)}
+.modal-set{background:var(--cyan);color:#000;border-color:var(--cyan)}
+.modal-set:hover{background:#1bc8e4}
+.modal-clear{background:var(--s1);color:var(--red);border-color:rgba(248,113,113,.3)}
+.modal-clear:hover{background:rgba(248,113,113,.08)}
+.alert-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);display:inline-block;margin-left:5px;vertical-align:middle;animation:blink .9s ease infinite}
+
+/* Alert list in header area */
+.alert-bar{background:var(--s1);border:1px solid rgba(251,191,36,.25);border-radius:var(--r);padding:10px 14px;margin-bottom:16px;display:none;flex-wrap:wrap;gap:8px;align-items:center}
+.alert-bar.has-alerts{display:flex}
+.alert-bar-label{font-size:10px;color:var(--amber);letter-spacing:.05em;margin-right:4px}
+.alert-tag{font-size:10px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:4px;padding:3px 8px;color:var(--amber);display:flex;align-items:center;gap:5px;cursor:pointer}
+.alert-tag:hover{background:rgba(251,191,36,.14)}
+.alert-tag .rm{color:var(--dim);font-size:12px}
+.alert-tag .rm:hover{color:var(--red)}
+
 .cerr{font-size:11px;color:var(--red);opacity:.7;text-align:center;padding:12px 0}
 .empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--dim);font-size:13px}
-
-.toast{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--s3);border:1px solid var(--b2);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--txt);opacity:0;transform:translateY(6px);transition:all .2s;pointer-events:none}
+.toast{position:fixed;bottom:20px;right:20px;z-index:200;background:var(--s3);border:1px solid var(--b2);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--txt);opacity:0;transform:translateY(6px);transition:all .2s;pointer-events:none;max-width:320px}
 .toast.show{opacity:1;transform:none}
-
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px}
-
 @media(max-width:540px){.grid{grid-template-columns:1fr 1fr}}
 @media(max-width:360px){.grid{grid-template-columns:1fr}}
 </style>
@@ -175,6 +200,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
   </button>
 </header>
 
+<!-- Active alerts bar -->
+<div class="alert-bar" id="alert-bar">
+  <span class="alert-bar-label">⏰ ALERTS</span>
+  <span id="alert-tags"></span>
+</div>
+
 <div class="ctrl">
   <div class="sbox">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -187,7 +218,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
     <span>%</span>
   </div>
   <button class="fpill" id="fath" onclick="toggleF('ath')">★ Near ATH</button>
-  <select id="sortby" onchange="render()" style="font-family:var(--mono);font-size:11px;background:var(--s1);border:1px solid var(--b0);color:var(--dim);border-radius:var(--rsm);padding:8px 10px;outline:none;cursor:pointer;">
+  <select id="sortby" onchange="render()">
     <option value="pfa">Sort: % from ATH</option>
     <option value="sym">Sort: Ticker A–Z</option>
     <option value="price">Sort: Price ↓</option>
@@ -196,13 +227,34 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 </div>
 
 <div class="sumbar" id="sumbar"></div>
-<div class="grid"  id="grid"></div>
+<div class="grid"   id="grid"></div>
 
+</div><!-- /wrap -->
+
+<!-- Alert modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal(null)">✕</button>
+    <div class="modal-title" id="modal-title">Set Price Alert</div>
+    <div class="modal-sym"  id="modal-sym"></div>
+    <div class="modal-price-ref" id="modal-price-ref"></div>
+    <label>ALERT PRICE — notify when price crosses this</label>
+    <input type="number" id="alert-input" step="0.01" placeholder="Enter price...">
+    <div class="modal-hint">
+      Browser notification fires on the next price refresh after the threshold is crossed.<br>
+      Make sure to allow notifications when prompted.
+    </div>
+    <div class="modal-actions">
+      <button class="modal-set"   onclick="saveAlert()">Set alert</button>
+      <button class="modal-clear" onclick="clearAlert()">Clear alert</button>
+    </div>
+  </div>
 </div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-/* ── Data ──────────────────────────────────────────────────────────────── */
+/* ── Stock list ─────────────────────────────────────────────────────────── */
 const STOCKS = [
   {sym:'AAPL',name:'Apple Inc',         exch:'NASDAQ'},
   {sym:'AMD', name:'Adv Micro Devices', exch:'NASDAQ'},
@@ -227,33 +279,32 @@ const STOCKS = [
   {sym:'ORCL',name:'Oracle Corp',       exch:'NYSE'  },
   {sym:'PLTR',name:'Palantir Tech',     exch:'NASDAQ'},
   {sym:'RKLB',name:'Rocket Lab Corp',   exch:'NASDAQ'},
-  {sym:'SNDL',name:'SNDL Inc',          exch:'NASDAQ'},
+  {sym:'SNDK',name:'SanDisk Corp',      exch:'NASDAQ'},
   {sym:'TSLA',name:'Tesla Inc',         exch:'NASDAQ'},
   {sym:'XLE', name:'Energy SPDR ETF',   exch:'NYSE'  },
 ];
 
-// Historical ATHs that exceed Yahoo's 52-week window
 const HIST_ATH = {
-  AAPL:315.00, AMD:527.20, AMZN:278.56, BABA:192.67,
-  COIN:444.65, CRCL:298.99, GOOGL:408.61, HOOD:153.86,
-  META:796.25, MSFT:555.45, MSTR:543.00, NVDA:236.54,
-  ORCL:345.72, PLTR:207.52, RKLB:151.00, TSLA:498.83,
+  AAPL:315.00,AMD:527.20,AMZN:278.56,BABA:192.67,
+  COIN:444.65,CRCL:298.99,GOOGL:408.61,HOOD:153.86,
+  META:796.25,MSFT:555.45,MSTR:543.00,NVDA:236.54,
+  ORCL:345.72,PLTR:207.52,RKLB:151.00,TSLA:498.83,
 };
 
-// CORS proxy — works from any origin including file://
-const PROXY = 'https://cors-anywhere.fly.dev/';
-
+const PROXY  = 'https://cors-anywhere.fly.dev/';
 const LEVELS = [5,10,15,20,25,30,40,50];
-let live = {};        // sym -> {price, ath, chg, chgPct}
-let busy = false;
-let fNear = false, fATH = false;
 
-/* ── Fetch ─────────────────────────────────────────────────────────────── */
+let live    = {};
+let busy    = false;
+let fNear   = false, fATH = false;
+let openCard = null;   // sym of currently expanded card
+let modalSym = null;   // sym currently open in alert modal
+let alerts  = JSON.parse(localStorage.getItem('ath_alerts') || '{}'); // sym -> targetPrice
+
+/* ── Fetch ──────────────────────────────────────────────────────────────── */
 async function fetchOne(sym) {
   const yahoo = `https://query2.finance.yahoo.com/v8/finance/chart/${sym}?interval=1d&range=1d`;
-  const res = await fetch(PROXY + yahoo, {
-    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-  });
+  const res = await fetch(PROXY + yahoo, { headers:{'X-Requested-With':'XMLHttpRequest'} });
   if (!res.ok) throw new Error(res.status);
   const d = await res.json();
   const m = d.chart.result[0].meta;
@@ -262,7 +313,7 @@ async function fetchOne(sym) {
   const hi52  = m.fiftyTwoWeekHigh || price;
   const ha    = HIST_ATH[sym];
   const ath   = ha ? Math.max(ha, hi52) : hi52;
-  return { price, ath, chg: price-prev, chgPct: prev ? (price-prev)/prev*100 : 0 };
+  return { price, ath, chg:price-prev, chgPct: prev?(price-prev)/prev*100:0 };
 }
 
 async function doRefresh() {
@@ -276,97 +327,195 @@ async function doRefresh() {
   const settled = await Promise.allSettled(
     STOCKS.map(s => fetchOne(s.sym).then(r => ({ok:true, sym:s.sym, ...r})))
   );
-
   let ok = 0;
   settled.forEach(r => {
-    if (r.status === 'fulfilled' && r.value.ok) {
-      live[r.value.sym] = r.value; ok++;
-    }
+    if (r.status==='fulfilled' && r.value.ok) { live[r.value.sym]=r.value; ok++; }
   });
 
-  const now = new Date();
-  const ts  = now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  if (ok === 0) {
-    setDot('err','Failed to load — check connection & retry');
-  } else if (ok < 20) {
-    setDot('spin',`Partial: ${ok}/${STOCKS.length} loaded · ${ts}`);
-  } else {
-    setDot('','Live · ${ts} ET · ${ok}/${STOCKS.length}');
+  const ts = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  if (ok===0) { setDot('err','Failed to load — check connection & retry'); }
+  else {
     document.getElementById('dot').className = 'dot';
     document.getElementById('stxt').textContent = `Live · ${ts} ET · ${ok}/${STOCKS.length} loaded`;
   }
-
   btn.classList.remove('spinning'); btn.disabled = false;
   busy = false;
+  checkAlerts();
   render();
   toast(`${ok}/${STOCKS.length} prices refreshed`);
 }
 
-/* ── Helpers ────────────────────────────────────────────────────────────── */
-function setDot(cls, txt) {
-  document.getElementById('dot').className = 'dot' + (cls ? ' '+cls : '');
-  document.getElementById('stxt').textContent = txt;
+/* ── Alert engine ───────────────────────────────────────────────────────── */
+function saveAlerts() { localStorage.setItem('ath_alerts', JSON.stringify(alerts)); }
+
+async function requestNotifPermission() {
+  if (!('Notification' in window)) return false;
+  if (Notification.permission === 'granted') return true;
+  const p = await Notification.requestPermission();
+  return p === 'granted';
 }
-const fp = n => n==null ? '—' : n>=1000 ? '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '$'+n.toFixed(2);
+
+function checkAlerts() {
+  for (const [sym, target] of Object.entries(alerts)) {
+    const d = live[sym];
+    if (!d) continue;
+    const prev = d._alertLastPrice ?? d.price;
+    const crossed = (prev >= target && d.price < target) || (prev <= target && d.price > target);
+    if (crossed) {
+      const dir = d.price < target ? 'fallen below' : 'risen above';
+      fireNotification(sym, d.price, target, dir);
+      // Remove alert after firing so it doesn't repeat
+      delete alerts[sym];
+      saveAlerts();
+    }
+    d._alertLastPrice = d.price;
+  }
+  renderAlertBar();
+}
+
+function fireNotification(sym, price, target, dir) {
+  const msg = `${sym} has ${dir} your alert price of $${target.toFixed(2)}. Current: $${price.toFixed(2)}`;
+  if (Notification.permission === 'granted') {
+    new Notification(`⏰ ATH·RADAR Alert: ${sym}`, { body: msg, icon: '' });
+  }
+  toast(`⏰ ${msg}`);
+}
+
+function renderAlertBar() {
+  const bar  = document.getElementById('alert-bar');
+  const tags = document.getElementById('alert-tags');
+  const keys = Object.keys(alerts);
+  if (!keys.length) { bar.classList.remove('has-alerts'); return; }
+  bar.classList.add('has-alerts');
+  tags.innerHTML = keys.map(sym => {
+    const t = alerts[sym];
+    const d = live[sym];
+    const cur = d ? ` · now ${fp(d.price)}` : '';
+    return `<span class="alert-tag" onclick="openModal('${sym}')">
+      ${sym} @ ${fp(t)}${cur}
+      <span class="rm" onclick="event.stopPropagation();removeAlert('${sym}')">✕</span>
+    </span>`;
+  }).join('');
+}
+
+function removeAlert(sym) {
+  delete alerts[sym];
+  saveAlerts();
+  renderAlertBar();
+  render();
+  toast(`Alert removed for ${sym}`);
+}
+
+/* ── Modal ──────────────────────────────────────────────────────────────── */
+function openModal(sym) {
+  modalSym = sym;
+  const d  = live[sym];
+  const s  = STOCKS.find(x=>x.sym===sym);
+  document.getElementById('modal-title').textContent = `Price Alert — ${sym}`;
+  document.getElementById('modal-sym').textContent   = s?.name || '';
+  document.getElementById('modal-price-ref').innerHTML =
+    d ? `Current: <b style="color:var(--cyan)">${fp(d.price)}</b>  &nbsp;|&nbsp;  ATH: <b style="color:var(--hi)">${fp(d.ath)}</b>  &nbsp;|&nbsp;  Today: <span class="${d.chg>=0?'pos':'neg'}">${d.chg>=0?'+':''}${d.chgPct.toFixed(2)}%</span>` : 'Price not loaded yet';
+  const existing = alerts[sym];
+  document.getElementById('alert-input').value = existing ? existing : (d ? d.price.toFixed(2) : '');
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.remove('open');
+  modalSym = null;
+}
+
+async function saveAlert() {
+  const val = parseFloat(document.getElementById('alert-input').value);
+  if (!modalSym || isNaN(val) || val <= 0) { toast('Enter a valid price'); return; }
+  const granted = await requestNotifPermission();
+  if (!granted) { toast('Please allow notifications in your browser to receive alerts'); return; }
+  alerts[modalSym] = val;
+  saveAlerts();
+  document.getElementById('modal-overlay').classList.remove('open');
+  renderAlertBar();
+  render();
+  toast(`Alert set: ${modalSym} @ ${fp(val)}`);
+  modalSym = null;
+}
+
+function clearAlert() {
+  if (!modalSym) return;
+  delete alerts[modalSym];
+  saveAlerts();
+  document.getElementById('modal-overlay').classList.remove('open');
+  renderAlertBar();
+  render();
+  toast(`Alert cleared for ${modalSym}`);
+  modalSym = null;
+}
+
+/* ── Helpers ────────────────────────────────────────────────────────────── */
+function setDot(cls,txt){ document.getElementById('dot').className='dot'+(cls?' '+cls:''); document.getElementById('stxt').textContent=txt; }
+const fp = n => n==null?'—':n>=1000?'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'$'+n.toFixed(2);
 const barC = pct => { const a=Math.abs(pct); return a<=5?'var(--green)':a<=12?'var(--cyan)':a<=22?'var(--amber)':a<=35?'var(--orange)':'var(--red)'; };
 
-function nearestLvl(price, ath) {
-  if (!price||!ath) return null;
-  const pd = ((ath-price)/ath)*100;
-  let best=null, bd=Infinity;
-  for (const l of LEVELS) { const d=Math.abs(pd-l); if(d<bd){bd=d;best=l;} }
-  return best;
+function nearestLvl(price,ath) {
+  if(!price||!ath) return null;
+  const pd=((ath-price)/ath)*100; let best=null,bd=Infinity;
+  for(const l of LEVELS){const d=Math.abs(pd-l);if(d<bd){bd=d;best=l;}} return best;
 }
-function isNear(price, ath, margin) {
-  if (!price||!ath||margin<=0) return false;
+function isNear(price,ath,margin) {
+  if(!price||!ath||margin<=0) return false;
   const pd=((ath-price)/ath)*100;
-  return LEVELS.some(l => Math.abs(pd-l)<=margin);
+  return LEVELS.some(l=>Math.abs(pd-l)<=margin);
 }
 function toast(msg) {
   const t=document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2400);
+  setTimeout(()=>t.classList.remove('show'),3000);
 }
 function toggleF(f) {
-  if (f==='near') { fNear=!fNear; document.getElementById('fnear').classList.toggle('on',fNear); if(fNear){fATH=false;document.getElementById('fath').classList.remove('on');} }
-  else             { fATH=!fATH;  document.getElementById('fath').classList.toggle('on',fATH);  if(fATH){fNear=false;document.getElementById('fnear').classList.remove('on');} }
+  if(f==='near'){fNear=!fNear;document.getElementById('fnear').classList.toggle('on',fNear);if(fNear){fATH=false;document.getElementById('fath').classList.remove('on');}}
+  else          {fATH=!fATH; document.getElementById('fath').classList.toggle('on',fATH); if(fATH){fNear=false;document.getElementById('fnear').classList.remove('on');}}
   render();
 }
 
-/* ── Skeleton ───────────────────────────────────────────────────────────── */
+/* ── Expand / collapse card ─────────────────────────────────────────────── */
+function toggleCard(sym) {
+  openCard = openCard===sym ? null : sym;
+  render();
+}
+
+/* ── Skeletons ──────────────────────────────────────────────────────────── */
 function renderSkeletons() {
-  document.getElementById('grid').innerHTML = STOCKS.map(() =>
+  document.getElementById('grid').innerHTML = STOCKS.map(()=>
     `<div class="card"><div class="skel sk-t"></div><div class="skel sk-l"></div><div class="skel sk-s"></div><div class="skel sk-m"></div><div class="skel sk-b"></div></div>`
   ).join('');
 }
 
 /* ── Render ─────────────────────────────────────────────────────────────── */
 function render() {
-  const q      = document.getElementById('q').value.toLowerCase();
-  const margin = parseFloat(document.getElementById('margin').value) || 3;
-  let totalLoad=0, nearCnt=0, athCnt=0;
-  const show = [];
+  const q       = document.getElementById('q').value.toLowerCase();
+  const margin  = parseFloat(document.getElementById('margin').value)||1;
+  const sortKey = document.getElementById('sortby')?.value||'pfa';
+  let totalLoad=0,nearCnt=0,athCnt=0;
+  const show=[];
 
-  const sortKey = document.getElementById('sortby')?.value || 'pfa';
-  for (const s of STOCKS) {
-    const d = live[s.sym];
-    if (d) totalLoad++;
-    const price=d?.price, ath=d?.ath;
-    const pfa = (price&&ath) ? ((price-ath)/ath)*100 : null;
-    const near = isNear(price,ath,margin);
-    const atH  = pfa!=null && pfa>=-2;
-    if (near) nearCnt++;
-    if (atH)  athCnt++;
-    if (q && !s.sym.toLowerCase().includes(q) && !s.name.toLowerCase().includes(q)) continue;
-    if (fNear && !near) continue;
-    if (fATH  && !atH)  continue;
+  for(const s of STOCKS){
+    const d=live[s.sym];
+    if(d) totalLoad++;
+    const price=d?.price,ath=d?.ath;
+    const pfa=(price&&ath)?((price-ath)/ath)*100:null;
+    const near=isNear(price,ath,margin);
+    const atH=pfa!=null&&pfa>=-2;
+    if(near) nearCnt++;
+    if(atH)  athCnt++;
+    if(q&&!s.sym.toLowerCase().includes(q)&&!s.name.toLowerCase().includes(q)) continue;
+    if(fNear&&!near) continue;
+    if(fATH&&!atH)   continue;
     show.push({s,d,pfa,near,atH});
   }
-  show.sort((a,b) => {
-    if (sortKey==='sym')   return a.s.sym.localeCompare(b.s.sym);
-    if (sortKey==='price') return (b.d?.price||0)-(a.d?.price||0);
-    if (sortKey==='chg')   return (b.d?.chgPct||0)-(a.d?.chgPct||0);
-    // default: pfa — closest to ATH first (least negative)
+  show.sort((a,b)=>{
+    if(sortKey==='sym')   return a.s.sym.localeCompare(b.s.sym);
+    if(sortKey==='price') return (b.d?.price||0)-(a.d?.price||0);
+    if(sortKey==='chg')   return (b.d?.chgPct||0)-(a.d?.chgPct||0);
     return (b.pfa??-999)-(a.pfa??-999);
   });
 
@@ -376,50 +525,64 @@ function render() {
     `<div class="spill warn"><b>${nearCnt}</b> near retracement ±${margin}%</div>`+
     `<div class="spill"><b>${show.length}</b> shown</div>`;
 
-  if (!show.length) {
-    document.getElementById('grid').innerHTML='<div class="empty">No stocks match your filter.</div>';
-    return;
-  }
-  document.getElementById('grid').innerHTML = show.map(({s,d,pfa,near,atH}) =>
-    d ? buildCard(s,d,pfa,near,atH,margin) : errCard(s)
-  ).join('');
+  if(!show.length){document.getElementById('grid').innerHTML='<div class="empty">No stocks match your filter.</div>';return;}
+  document.getElementById('grid').innerHTML=show.map(({s,d,pfa,near,atH})=>d?buildCard(s,d,pfa,near,atH,margin):errCard(s)).join('');
+  renderAlertBar();
 }
 
-function errCard(s) {
-  return `<div class="card"><div class="chard"><div><div class="csym">${s.sym}</div><div class="cname">${s.name}</div></div></div><div class="cerr">Price unavailable — refresh to retry</div></div>`;
+function errCard(s){
+  return `<div class="card" onclick="openModal('${s.sym}')"><div class="chard"><div><div class="csym">${s.sym}</div><div class="cname">${s.name}</div></div></div><div class="cerr">Price unavailable — refresh to retry</div></div>`;
 }
 
-function buildCard(s,d,pfa,near,atH,margin) {
-  const {price,ath,chg,chgPct} = d;
-  const lvl   = nearestLvl(price,ath);
-  const retPx = lvl!=null ? ath*(1-lvl/100) : null;
-  const dist  = (retPx!=null) ? ((price-retPx)/retPx)*100 : null;
-  const isHit = retPx!=null && price<=retPx;
-  const isNearLvl = near && !isHit;
-  const fillW = pfa!=null ? Math.min(100,Math.abs(pfa)*2) : 0;
-  const fc    = barC(pfa??-100);
-  const cc    = atH?'card c-ath':isHit?'card c-hit':near?'card c-near':'card';
-  const badge = atH?'<span class="badge b-ath">★ ATH</span>':isHit?'<span class="badge b-hit">LEVEL HIT</span>':near?'<span class="badge b-near">⚡ NEAR</span>':pfa!=null&&pfa<-40?'<span class="badge b-deep">DEEP</span>':'';
-  const rbc   = isHit?'rblock rhit':near?'rblock rnear':'rblock';
-  const rcc   = isHit?'var(--red)':near?'var(--amber)':fc;
-  const dirC  = dist!=null?(dist<0?'var(--red)':'var(--green)'):'var(--dim)';
-  const dirL  = dist!=null?(dist<0?`${Math.abs(dist).toFixed(1)}% below — breached`:`${dist.toFixed(1)}% above level`):'';
-  const gap   = (price!=null&&retPx!=null)?Math.abs(price-retPx):null;
-  const chgCls= chg>=0?'cval chg pos':'cval chg neg';
-  const chgStr= chg!=null?(chg>=0?'+':'')+chg.toFixed(2)+' ('+(chgPct>=0?'+':'')+chgPct.toFixed(2)+'%)':'';
+function buildCard(s,d,pfa,near,atH,margin){
+  const {price,ath,chg,chgPct}=d;
+  const lvl   =nearestLvl(price,ath);
+  const retPx =lvl!=null?ath*(1-lvl/100):null;
+  const dist  =(retPx!=null)?((price-retPx)/retPx)*100:null;
+  const isHit =retPx!=null&&price<=retPx;
+  const fillW =pfa!=null?Math.min(100,Math.abs(pfa)*2):0;
+  const fc    =barC(pfa??-100);
+  const cc    =atH?'card c-ath':isHit?'card c-hit':near?'card c-near':'card';
+  const badge =atH?'<span class="badge b-ath">★ ATH</span>':isHit?'<span class="badge b-hit">LEVEL HIT</span>':near?'<span class="badge b-near">⚡ NEAR</span>':pfa!=null&&pfa<-40?'<span class="badge b-deep">DEEP</span>':'';
+  const rbc   =isHit?'rblock rhit':near?'rblock rnear':'rblock';
+  const rcc   =isHit?'var(--red)':near?'var(--amber)':fc;
+  const dirC  =dist!=null?(dist<0?'var(--red)':'var(--green)'):'var(--dim)';
+  const dirL  =dist!=null?(dist<0?`${Math.abs(dist).toFixed(1)}% below — breached`:`${dist.toFixed(1)}% above level`):'';
+  const gap   =(price!=null&&retPx!=null)?Math.abs(price-retPx):null;
+  const chgStr=chg!=null?(chg>=0?'+':'')+chg.toFixed(2)+' ('+(chgPct>=0?'+':'')+chgPct.toFixed(2)+'%)':'';
+  const hasAlert = alerts[s.sym]!=null;
+  const alertDot = hasAlert?`<span class="alert-dot" title="Alert set @ ${fp(alerts[s.sym])}"></span>`:'';
+  const isOpen = openCard===s.sym;
+
+  // Build all-levels panel
+  const levelsHtml = LEVELS.map(l=>{
+    const tgt=ath*(1-l/100);
+    const breached=price<=tgt;
+    const isNearest=l===lvl;
+    const rowCls=breached?'lrow breached':isNearest?'lrow active-zone':'lrow';
+    const check=breached?'✓':'';
+    return `<div class="${rowCls}">
+      <span class="lpct">${l}%  <span class="lcheck">${check}</span></span>
+      <span class="lprice">${fp(tgt)}</span>
+    </div>`;
+  }).join('');
+
   return `
-<div class="${cc}">
+<div class="${cc}" onclick="toggleCard('${s.sym}')">
   <div class="chard">
     <div>
-      <div class="csym">${s.sym}</div>
+      <div class="csym">${s.sym}${alertDot}</div>
       <div class="cname">${s.name}</div>
       <div class="cexch">${s.exch}</div>
     </div>
-    <div>${badge}</div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      ${badge}
+      <span class="fpill" style="font-size:9px;padding:2px 7px;color:var(--dim);border-color:var(--b0)" onclick="event.stopPropagation();openModal('${s.sym}')">⏰ alert</span>
+    </div>
   </div>
   <div class="cprices">
     <div class="crow"><span class="clbl">LIVE PRICE</span><span class="cval live ${chg>0?'up':chg<0?'dn':'flat'}">${fp(price)}</span></div>
-    <div class="crow"><span></span><span class="${chgCls}">${chgStr}</span></div>
+    <div class="crow"><span></span><span class="cval chg ${chg>=0?'pos':'neg'}">${chgStr}</span></div>
     <div class="crow" style="margin-top:3px"><span class="clbl">ALL-TIME HIGH</span><span class="cval athv">${fp(ath)}</span></div>
   </div>
   <div class="pbar">
@@ -441,44 +604,44 @@ function buildCard(s,d,pfa,near,atH,margin) {
       <div class="rgap">${gap!=null?fp(gap)+' gap':''}</div>
     </div>
   </div>
+  <div class="expand-hint">${isOpen?'▲ click to collapse':'▼ click to see all levels'}</div>
+  <div class="levels-panel ${isOpen?'open':''}">
+    <div style="font-size:9px;color:var(--dim);letter-spacing:.05em;margin-bottom:6px">ALL RETRACEMENT LEVELS FROM ATH ${fp(ath)}</div>
+    <div class="levels-grid">${levelsHtml}</div>
+  </div>
 </div>`;
 }
 
-/* ── Init ─────────────────────────────────────────────────────────────── */
+/* ── Init & auto-refresh ────────────────────────────────────────────────── */
 doRefresh();
+renderAlertBar();
 
-// Auto-refresh every 5 minutes
-const AUTO_INTERVAL = 5 * 60 * 1000;
+const AUTO_INTERVAL = 5*60*1000;
 let autoTimer = setInterval(doRefresh, AUTO_INTERVAL);
 
-// Show countdown in status
-function startCountdown() {
-  let remaining = AUTO_INTERVAL / 1000;
+function startCountdown(){
+  let rem=AUTO_INTERVAL/1000;
   clearInterval(window._cdTimer);
-  window._cdTimer = setInterval(() => {
-    remaining--;
-    if (remaining <= 0) { clearInterval(window._cdTimer); return; }
-    const m = Math.floor(remaining/60), s = remaining%60;
-    const cd = m>0 ? `${m}m ${s}s` : `${s}s`;
-    const el = document.getElementById('stxt');
-    if (el && !busy) {
-      const base = el.textContent.split(' · next')[0];
-      el.textContent = base + ` · next refresh in ${cd}`;
-    }
-  }, 1000);
+  window._cdTimer=setInterval(()=>{
+    rem--;
+    if(rem<=0){clearInterval(window._cdTimer);return;}
+    const m=Math.floor(rem/60),s=rem%60;
+    const el=document.getElementById('stxt');
+    if(el&&!busy){const b=el.textContent.split(' · next')[0];el.textContent=b+` · next in ${m>0?m+'m ':''}`+`${s}s`;}
+  },1000);
 }
 
-// Patch doRefresh to restart countdown after each refresh
-const _origRefresh = doRefresh;
-window.doRefresh = async function() {
+const _orig=doRefresh;
+window.doRefresh=async function(){
   clearInterval(autoTimer);
-  await _origRefresh();
+  await _orig();
   startCountdown();
-  autoTimer = setInterval(doRefresh, AUTO_INTERVAL);
+  autoTimer=setInterval(doRefresh,AUTO_INTERVAL);
 };
-// Kick off countdown after first load
-document.addEventListener('DOMContentLoaded', () => setTimeout(startCountdown, 3000));
-setTimeout(startCountdown, 3000);
+setTimeout(startCountdown,3000);
+
+// Close modal on Escape
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal(null);});
 </script>
 </body>
 </html>
