@@ -117,7 +117,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
 .crow{display:flex;justify-content:space-between;align-items:baseline}
 .clbl{font-size:10px;color:var(--dim);letter-spacing:.05em}
 .cval{font-size:14px;font-weight:500;letter-spacing:-.3px;color:#fff}
-.cval.live{color:var(--cyan)}
+.cval.live.up{color:var(--green)}
+.cval.live.dn{color:var(--red)}
+.cval.live.flat{color:var(--cyan)}
 .cval.athv{font-size:11px;color:var(--hi)}
 .cval.chg{font-size:11px}
 .pos{color:var(--green)}
@@ -185,6 +187,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--mono);min-height:10
     <span>%</span>
   </div>
   <button class="fpill" id="fath" onclick="toggleF('ath')">★ Near ATH</button>
+  <select id="sortby" onchange="render()" style="font-family:var(--mono);font-size:11px;background:var(--s1);border:1px solid var(--b0);color:var(--dim);border-radius:var(--rsm);padding:8px 10px;outline:none;cursor:pointer;">
+    <option value="pfa">Sort: % from ATH</option>
+    <option value="sym">Sort: Ticker A–Z</option>
+    <option value="price">Sort: Price ↓</option>
+    <option value="chg">Sort: Day change</option>
+  </select>
 </div>
 
 <div class="sumbar" id="sumbar"></div>
@@ -219,7 +227,7 @@ const STOCKS = [
   {sym:'ORCL',name:'Oracle Corp',       exch:'NYSE'  },
   {sym:'PLTR',name:'Palantir Tech',     exch:'NASDAQ'},
   {sym:'RKLB',name:'Rocket Lab Corp',   exch:'NASDAQ'},
-  {sym:'SNDK',name:'SanDisk Corp',          exch:'NASDAQ'},
+  {sym:'SNDL',name:'SNDL Inc',          exch:'NASDAQ'},
   {sym:'TSLA',name:'Tesla Inc',         exch:'NASDAQ'},
   {sym:'XLE', name:'Energy SPDR ETF',   exch:'NYSE'  },
 ];
@@ -339,6 +347,7 @@ function render() {
   let totalLoad=0, nearCnt=0, athCnt=0;
   const show = [];
 
+  const sortKey = document.getElementById('sortby')?.value || 'pfa';
   for (const s of STOCKS) {
     const d = live[s.sym];
     if (d) totalLoad++;
@@ -353,6 +362,13 @@ function render() {
     if (fATH  && !atH)  continue;
     show.push({s,d,pfa,near,atH});
   }
+  show.sort((a,b) => {
+    if (sortKey==='sym')   return a.s.sym.localeCompare(b.s.sym);
+    if (sortKey==='price') return (b.d?.price||0)-(a.d?.price||0);
+    if (sortKey==='chg')   return (b.d?.chgPct||0)-(a.d?.chgPct||0);
+    // default: pfa — closest to ATH first (least negative)
+    return (b.pfa??-999)-(a.pfa??-999);
+  });
 
   document.getElementById('sumbar').innerHTML =
     `<div class="spill"><b>${totalLoad}</b> live prices</div>`+
@@ -402,7 +418,7 @@ function buildCard(s,d,pfa,near,atH,margin) {
     <div>${badge}</div>
   </div>
   <div class="cprices">
-    <div class="crow"><span class="clbl">LIVE PRICE</span><span class="cval live">${fp(price)}</span></div>
+    <div class="crow"><span class="clbl">LIVE PRICE</span><span class="cval live ${chg>0?'up':chg<0?'dn':'flat'}">${fp(price)}</span></div>
     <div class="crow"><span></span><span class="${chgCls}">${chgStr}</span></div>
     <div class="crow" style="margin-top:3px"><span class="clbl">ALL-TIME HIGH</span><span class="cval athv">${fp(ath)}</span></div>
   </div>
@@ -430,6 +446,39 @@ function buildCard(s,d,pfa,near,atH,margin) {
 
 /* ── Init ─────────────────────────────────────────────────────────────── */
 doRefresh();
+
+// Auto-refresh every 5 minutes
+const AUTO_INTERVAL = 5 * 60 * 1000;
+let autoTimer = setInterval(doRefresh, AUTO_INTERVAL);
+
+// Show countdown in status
+function startCountdown() {
+  let remaining = AUTO_INTERVAL / 1000;
+  clearInterval(window._cdTimer);
+  window._cdTimer = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) { clearInterval(window._cdTimer); return; }
+    const m = Math.floor(remaining/60), s = remaining%60;
+    const cd = m>0 ? `${m}m ${s}s` : `${s}s`;
+    const el = document.getElementById('stxt');
+    if (el && !busy) {
+      const base = el.textContent.split(' · next')[0];
+      el.textContent = base + ` · next refresh in ${cd}`;
+    }
+  }, 1000);
+}
+
+// Patch doRefresh to restart countdown after each refresh
+const _origRefresh = doRefresh;
+window.doRefresh = async function() {
+  clearInterval(autoTimer);
+  await _origRefresh();
+  startCountdown();
+  autoTimer = setInterval(doRefresh, AUTO_INTERVAL);
+};
+// Kick off countdown after first load
+document.addEventListener('DOMContentLoaded', () => setTimeout(startCountdown, 3000));
+setTimeout(startCountdown, 3000);
 </script>
 </body>
 </html>
